@@ -25,6 +25,10 @@ public class Scenes implements SetScene {
             FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("workSpaceForVIP.fxml"));
             return new Scene(loader.load(), 400, 400);
         }
+        else if("workSceneForAdmin".equals(nameOfScene)){
+            FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("workSpaceForAdmin.fxml"));
+            return new Scene(loader.load(), 400, 400);
+        }
 
         else return null;
 

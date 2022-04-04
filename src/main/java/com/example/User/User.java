@@ -2,6 +2,8 @@ package com.example.User;
 
 
 import com.example.AppUtils.IDs;
+import com.example.wallet.BasicWallet;
+import com.example.wallet.Wallet;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class User  {
     public boolean VIP = false;
     public boolean admin = false;
     public IDs myID;
+    public Wallet wallet = new BasicWallet();
 
     public User(String name, String password, String Email, IDs id){
         this.name = name;
@@ -21,11 +24,5 @@ public class User  {
         this.password = password;
         this.myID = id;
     }
-
-    public void setOnline(){};
-    public void setVIP(){};
-    public void setAdmin(){};
-
-
 }
 

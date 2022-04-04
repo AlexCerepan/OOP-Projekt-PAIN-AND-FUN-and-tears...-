@@ -8,6 +8,7 @@ import com.example.User.User;
 import com.example.User.UserDatabase;
 import com.example.demo.view.IFrame;
 import com.example.demo.view.LoginView;
+import com.example.wallet.VIPWallet;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -82,6 +83,9 @@ public void logIn(String name, String Password) throws IOException {
             else if (currUser.myID == IDs.VIPs)
                 ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForVIP"));
 
+            else if (currUser.myID == IDs.Admin)
+                ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForAdmin"));
+
 
         }
         else {
@@ -134,7 +138,15 @@ private boolean SaveDownCast() {
         }
         currUser.VIP = true;
         currUser.myID = IDs.VIPs;
+        currUser.wallet = new VIPWallet();
 
         System.out.println("current user: " + currUser.name + " ID " + currUser.myID);
+    }
+
+    public void createAdmin(){
+        User admin = new User("Alex", "OOPisBest", "zahradka@juchu.fx", IDs.Admin );
+        admin.admin = true;
+        users.add(admin);
+        tree.insert(admin.name);
     }
 }

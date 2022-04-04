@@ -64,6 +64,7 @@ public class LoginView extends Application implements IFrame {
        setAndeInitialize3();
 
        Initializecontroller();
+       controler.createAdmin();
 
          getRegistretion.setOnAction(e -> actualStage.setScene(scene2));
          backToLogin.setOnAction(e -> actualStage.setScene(scene1));
