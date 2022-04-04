@@ -9,13 +9,12 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Label text="Welcome in the first Chapter" />
-    <TextField fx:id="writeNShow" promptText="Write in me " />
-    <Button fx:id="show" onAction="#onShowButtonClick" style="-fx-background-color: #dcd0ff " text="Show me" />
-    <Button fx:id="hide" onAction="#onHideButtonClick" style="-fx-background-color: #dcd0ff " text="Hide me" />
-    <Button fx:id="alert" onAction="#onAlertButtonClickVIP" style="-fx-background-color: #dcd0ff " text="Alert" />
+    <Label text="Status: VIP User" style="-fx-font-size:20"/>
+    <Button fx:id="show" onAction="#onShowButtonClick" style="-fx-background-color: #dcd0ff " text="Show wallet balance" />
+    <Button fx:id="hide" onAction="#onHideButtonClick" style="-fx-background-color: #dcd0ff " text="Hide balance" />
+    <Button fx:id="addMoney" onAction="#onaddMoneyClick" style="-fx-background-color: #dcd0ff " text="Add Money" />
     <Button fx:id="returnB" onAction="#onReturnButtonClick" style="-fx-background-color: #dcd0ff " text="Log Out" />
 
-    <Label fx:id="showText" style="-fx-font-family: 'Comic Sans MS' ; -fx-font-size: 15px" textFill="blueviolet" visible="false" />
+    <Label fx:id="urMoney" style="-fx-font-family: 'Comic Sans MS' ; -fx-font-size: 15px" textFill="blueviolet" visible="false" />
 
 </VBox>

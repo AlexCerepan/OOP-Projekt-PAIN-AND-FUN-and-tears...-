@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+import static com.example.AppUtils.SetScene.stage;
+
 
 public class LoginView extends Application implements IFrame {
 
@@ -28,6 +30,7 @@ public class LoginView extends Application implements IFrame {
     public Button pay = new Button("Get VIP");
     public Button goToVIP = new Button("GET VIP");
     public Button goToVIP2 = new Button("GET VIP");
+    public Button start = new Button("START");
     public Label userNameLabel = new Label("Name");
     public Label userNameLabel2 = new Label("Name");
     public Label userNameLabel3 = new Label("Name");
@@ -51,18 +54,15 @@ public class LoginView extends Application implements IFrame {
 
 
     public static LogInControler controler = null;
-    SetScene scene = new Scenes();
 
 
    @Override
     public void start(Stage stage) {
-       stage = scene.stage;
-       actualStage = stage;
+       actualStage = SetScene.stage;
        actualStage.setScene(scene1);
        setAndeInitialize1();
        setAndeInitialize2();
        setAndeInitialize3();
-
        Initializecontroller();
        controler.createAdmin();
 
@@ -170,6 +170,7 @@ public class LoginView extends Application implements IFrame {
         gridPane3.getChildren().addAll(text3, password3, userNameLabel3, userPasswordLabel3,
                 infoLabel3, backToLogin2, pay);
     }
+
 
 
     @Override

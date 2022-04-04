@@ -1,7 +1,7 @@
 package com.example.wallet;
 
 public abstract class Wallet {
-    float value;
+    public float value;
 
-    void addToWallet(float num){}
+    public void addToWallet(float num){}
 }

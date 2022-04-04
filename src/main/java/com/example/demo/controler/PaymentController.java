@@ -1,5 +1,6 @@
 package com.example.demo.controler;
 
+import com.example.AppUtils.IDs;
 import com.example.AppUtils.SetScene;
 import com.example.User.User;
 import com.example.demo.Scenes;
@@ -11,9 +12,11 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class PaymentController  {
+import static com.example.demo.Scenes.pay;
 
-    Notify notify = new LogInControler();
+public class PaymentController {
+
+    Notify notify;
     SetScene scene = new Scenes();
 
     @FXML
@@ -32,46 +35,66 @@ public class PaymentController  {
     Button payButton;
 
     @FXML
+    TextField addMoney;
+
+    @FXML
     protected void onPayButtonClick() throws IOException {
 
-     if(controlSymbols(cardCode.getText()) && controlSymbols(cardID.getText())) {
-         if ((cardID.getText().length() < 5)) {
+        if (controlSymbols(cardCode.getText()) && controlSymbols(cardID.getText())) {
+            if ((cardID.getText().length() < 5)) {
 
-             LogInControler.paying = false;
-             scene.getScene("payment fail", "TF DID U DO");
+                LogInControler.paying = false;
+                scene.getScene("payment fail", "TF DID U DO");
 
-         } else if ((cardCode.getText().length() > 3) && (cardCode.getText().length() <= 4)) {
-             LogInControler.paying = false;
-             scene.getScene("payment fail", "YOU DIDnt IT");
+            } else if ((cardCode.getText().length() > 3) && (cardCode.getText().length() <= 4)) {
+                LogInControler.paying = false;
+                scene.getScene("payment fail", "YOU DIDnt IT");
 
-         } else {
-             LogInControler.paying = true;
-             scene.getScene("payment suc", "YOU DID IT");
-             notify.notifyPls();
-             System.out.println("Notifypls");
-
-         }
-     }
-     else scene.getScene("payment fail", "EPIC FAIL");
+            } else {
+                if (pay) {
+                    System.out.println("Najprv peniaze: " + LogInControler.currUser.wallet.value);
+                    System.out.println("Pridali sa peniaze");
+                    add_Money();
+                } else {
+                    LogInControler.paying = true;
+                    notify = new LogInControler();
+                    notify.notifyPls();
+                    System.out.println("Notifypls");
+                }
+                scene.getScene("payment suc", "YOU DID IT");
+            }
+        } else scene.getScene("payment fail", "EPIC FAIL");
     }
 
     @FXML
-    protected void onReturnButtonClick(){
-
+    protected void onReturnButtonClick() throws IOException {
+        if (pay) {
+            if (LogInControler.currUser.myID == IDs.Bacis) {
+                scene.stage.setScene(scene.getScene("workScene"));
+            } else if (LogInControler.currUser.myID == IDs.VIPs) {
+                scene.stage.setScene(scene.getScene("workSceneForVIP"));
+            }
+        } else
             LoginView.actualStage.setScene(IFrame.scene1);
 
+        pay = false;
 
     }
 
-    boolean controlSymbols(String arr){
-        for(int i = 0 ; i < arr.length(); i++){
+    boolean controlSymbols(String arr) {
+        for (int i = 0; i < arr.length(); i++) {
             char a = arr.charAt(i);
-            if((a < '0') || (a > '9'))
+            if ((a < '0') || (a > '9'))
                 return false;
         }
         return true;
     }
 
-
+    void add_Money() {
+        if(controlSymbols(addMoney.getText())) {
+            LogInControler.currUser.wallet.addToWallet(Integer.parseInt(addMoney.getText()));
+            System.out.println(LogInControler.currUser.wallet.value);
+        }
+    }
 
 }

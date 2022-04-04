@@ -1,15 +1,17 @@
 package com.example.demo.controler;
 
 import com.example.AppUtils.SetScene;
+import com.example.User.UserDatabase;
 import com.example.demo.Scenes;
 import com.example.demo.view.IFrame;
 import com.example.demo.view.LoginView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 import java.io.IOException;
+
+import static com.example.demo.controler.LogInControler.currUser;
 
 public class WorkSpaceController
 {
@@ -21,40 +23,36 @@ public class WorkSpaceController
     Button hide ;
 
     @FXML
-    TextField writeNShow;
-
-    @FXML
-    Label showText;
-
-    @FXML
-    Button alert;
-
-    @FXML
     Button returnB;
 
     @FXML
+    Label urMoney;
+
+    @FXML
+    Button addMoney;
+
+
+    @FXML
+    protected void onaddMoneyClick() throws IOException {
+        scene.stage.setScene(scene.getScene("addMoney"));
+    }
+
+
+    @FXML
     protected void onShowButtonClick (){
-        showText.setText(writeNShow.getText());
-        showText.setVisible(true);
+        urMoney.setVisible(true);
+        urMoney.setText("Wallet blance: " + currUser.wallet.value);
     }
     @FXML
     protected void onHideButtonClick (){
-        showText.setVisible(false);
+        urMoney.setVisible(false);
     }
 
-    @FXML
-
-    protected void onAlertButtonClick () throws IOException {
-        scene.getScene("payment suc", "TF");
-    }
 
     @FXML
-    protected void onAlertButtonClickVIP () throws IOException {
-        scene.getScene("alertBoxForVIP", "TF");
-    }
-
-    @FXML
-    protected void onReturnButtonClick () throws IOException {
+    protected void onReturnButtonClick () {
+        UserDatabase.currActiveUsers.remove(currUser);
+        currUser.online = false;
         LoginView.actualStage.setScene(IFrame.scene1);
     }
 

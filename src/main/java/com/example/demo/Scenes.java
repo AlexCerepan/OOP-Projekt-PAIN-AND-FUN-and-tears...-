@@ -10,12 +10,13 @@ import java.io.IOException;
 
 public class Scenes implements SetScene {
 
+    public static boolean pay = false;
 
     public Scene getScene(String nameOfScene) throws IOException {
 
         if("workScene".equals(nameOfScene)) {
             FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("workSpace.fxml"));
-            return new Scene(loader.load(), 400, 400);
+            return new Scene(loader.load(), 500, 500);
         }
         else if ("payment".equals(nameOfScene)){
             FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("payment.fxml"));
@@ -23,11 +24,17 @@ public class Scenes implements SetScene {
         }
         else if("workSceneForVIP".equals(nameOfScene)){
             FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("workSpaceForVIP.fxml"));
-            return new Scene(loader.load(), 400, 400);
+            return new Scene(loader.load(), 500, 500);
         }
         else if("workSceneForAdmin".equals(nameOfScene)){
             FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("workSpaceForAdmin.fxml"));
-            return new Scene(loader.load(), 400, 400);
+            return new Scene(loader.load(), 500, 500);
+        }
+        else if("addMoney".equals(nameOfScene)){
+            FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("addMoney.fxml"));
+            pay = true;
+            return new Scene(loader.load(), 400,400);
+
         }
 
         else return null;
@@ -52,10 +59,14 @@ public class Scenes implements SetScene {
             scene = new Scene(loader.load(), 200, 200);
 
         }
-       else if ("alertBoxForVIP".equals(nameOfScene)){
-            FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("alertBoxForVIP.fxml"));
-            scene = new Scene(loader.load(), 200, 200);
+       else if ("banAlert".equals(nameOfScene)){
+            FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("alertBox3.fxml"));
+            scene = new Scene(loader.load(), 400, 200);
 
+        }
+       else if("noLongerVIP".equals(nameOfScene)){
+           FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("alertBoxForVIP.fxml"));
+           scene = new Scene(loader.load(), 400, 200);
         }
 
         window.setTitle(title);

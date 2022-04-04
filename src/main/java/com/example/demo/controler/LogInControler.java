@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import static com.example.User.UserDatabase.currActiveUsers;
 import static com.example.User.UserDatabase.users;
+import static com.example.demo.controler.AdminController.removeAdmin;
 
 public class LogInControler implements Notify{
 
@@ -25,7 +26,8 @@ public class LogInControler implements Notify{
     private TrieTree tree = new TrieTree();
     private IFrame _window;
     public static String generalName;
-    User currUser;
+    public static  User currUser;
+    private Notify notify;
 
     public LogInControler(IFrame window){
         this._window = window;
@@ -75,17 +77,29 @@ public void logIn(String name, String Password) throws IOException {
 
     else{
         if(Objects.equals(currUser.password, Password)) {
+
+            if(currUser.ban){
+              scene.getScene("banAlert", "Banned");
+            }
+            else {
                 currUser.online = true;
-            UserDatabase.currActiveUsers.add(currUser);
-            if(currUser.myID == IDs.Bacis)
-                ((LoginView) _window).actualStage.setScene(scene.getScene("workScene"));
+                UserDatabase.currActiveUsers.add(currUser);
+                if (currUser.myID == IDs.Bacis) {
 
-            else if (currUser.myID == IDs.VIPs)
-                ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForVIP"));
+                    ((LoginView) _window).actualStage.setScene(scene.getScene("workScene"));
 
-            else if (currUser.myID == IDs.Admin)
-                ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForAdmin"));
+                      if(removeAdmin){
+                        notify = new AdminController();
+                        notify.notifyPls();
+                        removeAdmin = false;
+                    }
+                }
+                else if (currUser.myID == IDs.VIPs)
+                    ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForVIP"));
 
+                else if (currUser.myID == IDs.Admin)
+                    ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForAdmin"));
+            }
 
         }
         else {
@@ -111,10 +125,16 @@ public void payforVIP(String name, String password) throws IOException{
 
     else{
         if(Objects.equals(currUser.password, password)) {
-            currUser.online = true;
-            UserDatabase.currActiveUsers.add(currUser);
-            System.out.println("Current user: " + currUser.name + " ID " + currUser.myID);
-            ((LoginView) _window).actualStage.setScene(scene.getScene("payment"));
+            if (currUser.ban) {
+                scene.getScene("banAlert", "Banned");
+            }
+            else {
+                currUser.online = true;
+                UserDatabase.currActiveUsers.add(currUser);
+                System.out.println("Current user: " + currUser.name + " ID " + currUser.myID);
+                ((LoginView) _window).actualStage.setScene(scene.getScene("payment"));
+
+            }
         }
         else {
             ((LoginView) _window).infoLabel3.setText("Wrong password");
@@ -137,8 +157,10 @@ private boolean SaveDownCast() {
                 currUser = u;
         }
         currUser.VIP = true;
+        float addToWall = currUser.wallet.value;
         currUser.myID = IDs.VIPs;
         currUser.wallet = new VIPWallet();
+        currUser.wallet.value += addToWall;
 
         System.out.println("current user: " + currUser.name + " ID " + currUser.myID);
     }

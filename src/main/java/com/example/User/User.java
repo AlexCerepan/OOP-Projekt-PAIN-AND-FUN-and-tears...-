@@ -15,6 +15,7 @@ public class User  {
     public boolean online = false;
     public boolean VIP = false;
     public boolean admin = false;
+    public boolean ban = false;
     public IDs myID;
     public Wallet wallet = new BasicWallet();
 

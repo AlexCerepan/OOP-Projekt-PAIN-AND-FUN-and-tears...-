@@ -15,6 +15,9 @@ public class AllertBox  {
     Label failed = new Label("failed");
 
     @FXML
+    Label banned;
+
+    @FXML
     Button close;
 
     @FXML
