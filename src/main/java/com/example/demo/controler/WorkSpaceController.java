@@ -80,6 +80,7 @@ public class WorkSpaceController
     void startAuctions() throws IOException {
         Scenes.stage.setScene(scene.getScene("auctionChoose"));
         currC = Scenes.ldr.getController();
+        currC.comboBox.getItems().addAll("Zlato", "Diamant", "Strieborna podkolienka");
         System.out.println(currC);
         notify.notifyPls();
 

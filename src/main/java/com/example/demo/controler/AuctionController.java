@@ -30,6 +30,9 @@ public class AuctionController implements AucItem, Notify {
     @FXML
     Label noMoney;
 
+    @FXML
+    Label theItem;
+
 
     @FXML
     protected void onReturnButtonClick() throws IOException {
@@ -91,8 +94,9 @@ public class AuctionController implements AucItem, Notify {
 
 
     @Override
-    public void notifyPls() throws IOException {
-
+    public void notifyPls() {
+        currC.theItem.setText(currC.item.name);
+        System.out.println(currC.item.name);
     }
 
 }

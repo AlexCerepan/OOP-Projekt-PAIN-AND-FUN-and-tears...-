@@ -13,6 +13,7 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
+    <Label fx:id="theItem" style="-fx-font-size: 10" />
     <Label fx:id="noMoney"/>
     <TextField fx:id="value" promptText="Bid"   />
     <Button fx:id="show" text="Bid" onAction="#onBidButtonClick" style="-fx-background-color: #dcd0ff"  />

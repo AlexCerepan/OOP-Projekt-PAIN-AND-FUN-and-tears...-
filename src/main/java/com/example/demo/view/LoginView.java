@@ -66,7 +66,7 @@ public class LoginView extends Application implements IFrame {
    @Override
     public void start(Stage stage) throws IOException {
        // len na skusanie potom vymazat
-       ItemDatabase.itemData.add(new Items("prasa", 558.5F));
+       ItemDatabase.addItems();
        UserDatabase.users.add(new User("a","aaaaa", "a", IDs.Bacis));
        LogInControler.currUser = UserDatabase.users.get(0);
        // potialto

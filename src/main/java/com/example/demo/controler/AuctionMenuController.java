@@ -22,6 +22,7 @@ public static AuctionMenuController currC;
 
  SetScene scene = new Scenes();
  AucItem getItem = new AuctionController();
+ Notify getname = new AuctionController();
 
     @FXML
     Button show;
@@ -78,6 +79,7 @@ public static AuctionMenuController currC;
                 System.out.println(getItem);
                 AuctionController.currC = a;
                 getItem.notifypls(comboBox.getValue(), a);
+                currC.notifyPls();
                 //  System.out.println("mal by som notifinut kontrolery: " + a);
             }
         }
