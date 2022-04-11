@@ -1,6 +1,11 @@
 package com.example.demo.view;
 
+import com.example.AppUtils.IDs;
 import com.example.AppUtils.SetScene;
+import com.example.Items.ItemDatabase;
+import com.example.Items.Items;
+import com.example.User.User;
+import com.example.User.UserDatabase;
 import com.example.demo.Scenes;
 import com.example.demo.controler.LogInControler;
 import javafx.application.Application;
@@ -52,14 +57,21 @@ public class LoginView extends Application implements IFrame {
 
 
 
+    // toto je len na testovanie
+    SetScene scene = new Scenes();
 
     public static LogInControler controler = null;
 
 
    @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
+       // len na skusanie potom vymazat
+       ItemDatabase.itemData.add(new Items("prasa", 558.5F));
+       UserDatabase.users.add(new User("a","aaaaa", "a", IDs.Bacis));
+       LogInControler.currUser = UserDatabase.users.get(0);
+       // potialto
        actualStage = SetScene.stage;
-       actualStage.setScene(scene1);
+       actualStage.setScene(scene.getScene("workScene"));
        setAndeInitialize1();
        setAndeInitialize2();
        setAndeInitialize3();

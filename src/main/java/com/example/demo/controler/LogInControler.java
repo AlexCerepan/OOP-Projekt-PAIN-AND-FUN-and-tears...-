@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import static com.example.User.UserDatabase.currActiveUsers;
 import static com.example.User.UserDatabase.users;
+import static com.example.demo.controler.AdminController.addAdmin;
 import static com.example.demo.controler.AdminController.removeAdmin;
 
 public class LogInControler implements Notify{
@@ -94,11 +95,22 @@ public void logIn(String name, String Password) throws IOException {
                         removeAdmin = false;
                     }
                 }
-                else if (currUser.myID == IDs.VIPs)
+                else if (currUser.myID == IDs.VIPs){
+
                     ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForVIP"));
 
+                    if(addAdmin){
+                        System.out.println("malo by vyskocit okno");
+                        notify = new AdminController();
+                        notify.notifyPls();
+                        addAdmin = false;
+                    }
+                }
+                    // skusam mu spravit samostatne okno
                 else if (currUser.myID == IDs.Admin)
-                    ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForAdmin"));
+                    scene.getScene("Admin", "hello");
+
+                    //    ((LoginView) _window).actualStage.setScene(scene.getScene("workSceneForAdmin"));
             }
 
         }
@@ -128,6 +140,9 @@ public void payforVIP(String name, String password) throws IOException{
             if (currUser.ban) {
                 scene.getScene("banAlert", "Banned");
             }
+            else if (currUser.VIP)
+                ((LoginView) _window).infoLabel3.setText("You already have VIP");
+
             else {
                 currUser.online = true;
                 UserDatabase.currActiveUsers.add(currUser);

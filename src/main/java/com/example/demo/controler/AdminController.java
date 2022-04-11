@@ -1,31 +1,51 @@
 package com.example.demo.controler;
 
+import com.example.AppUtils.AdminInform;
 import com.example.AppUtils.IDs;
 import com.example.AppUtils.SetScene;
+import com.example.Items.ItemDatabase;
+import com.example.Items.Items;
 import com.example.User.User;
 import com.example.User.UserDatabase;
 import com.example.demo.Scenes;
-import com.example.demo.view.IFrame;
-import com.example.demo.view.LoginView;
 import com.example.wallet.BasicWallet;
+import com.example.wallet.VIPWallet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.example.demo.controler.LogInControler.currUser;
 
-public class AdminController implements Notify{
+public class AdminController implements Notify {
+
+    public static ArrayList<Stage> activeAuc = new ArrayList<>();
 
     public static boolean removeAdmin = false;
+    public static boolean addAdmin = false;
 
-    private  User searched;
+    private User searched;
 
     private SetScene scene = new Scenes();
+    private final AdminInform inform = new AdminInform();
 
+
+    @FXML
+    TextField costOfItem;
+
+    @FXML
+    Button addAuc;
+
+    @FXML
+    Button remAuc;
+
+    @FXML
+    Button addthis;
 
     @FXML
     Label showMessage;
@@ -35,6 +55,9 @@ public class AdminController implements Notify{
 
     @FXML
     Button ban;
+
+    @FXML
+    Button giveVIP;
 
     @FXML
     Button returnB;
@@ -48,62 +71,144 @@ public class AdminController implements Notify{
     @FXML
     TextField userName;
 
+
     @FXML
-    protected void onFindUserClick(){
+    protected void onAddThisClick(){
+        addThis();
+    }
+
+
+    @FXML
+    protected void onAddAucClick() {
         userName.setVisible(true);
+        userName.setPromptText("add or remove Item");
+        costOfItem.setVisible(true);
+        addthis.setVisible(true);
     }
 
     @FXML
-    protected void onSearchClick(){
+    protected void onRemoveAucClick() throws IOException {
+        inform.removeAuction(userName.getText());
+    }
+
+    @FXML
+    protected void onFindUserClick() {
+        userName.setVisible(true);
+        costOfItem.setVisible(false);
+        userName.setPromptText("Find User");
+    }
+
+    @FXML
+    protected void onSearchClick() {
+        search();
+    }
+
+    @FXML
+    protected void onBanClick() {
+        ban();
+    }
+
+    @FXML
+    protected void onRemoveVIPClick() {
+        removeVIP();
+    }
+
+    @FXML
+    protected void onAddVIPClick() {
+        addVIP();
+    }
+
+
+    @FXML
+    protected void onReturnButtonClick() {
+        returnB();
+    }
+
+    @Override
+    public void notifyPls() throws IOException {
+        System.out.println("som v notify pls pri addadmin a addadmin je: " + addAdmin);
+        if (addAdmin) {
+            scene.getScene("noLongerVIP2", "Good for you");
+        }
+            else
+            scene.getScene("noLongerVIP", "Not sorry");
+    }
+
+
+    void ban() {
+        searched.ban = true;
+        showMessage.setText(userName.getText() + " has ben banned");
+        showMessage.setVisible(true);
+    }
+
+    // odhlasenie sa
+    void returnB() {
+        UserDatabase.currActiveUsers.remove(currUser);
+        currUser.online = false;
+        showMessage.setVisible(false);
+        SetScene.forAdmin.close();
+    }
+
+    // odoberanie VIP
+
+    void removeVIP() {
+        if (searched.myID == IDs.VIPs) {
+            searched.VIP = false;
+            searched.myID = IDs.Bacis;
+            float value = searched.wallet.value;
+            searched.wallet = new BasicWallet();
+            searched.wallet.value += value;
+            showMessage.setText(userName.getText() + " has no longer VIP");
+            removeAdmin = true;
+        } else
+            showMessage.setText(userName.getText() + " has no VIP");
+
+        showMessage.setVisible(true);
+    }
+
+    void search() {
+        userName.setPromptText("Enter user name");
         boolean found = false;
-        for(User u : UserDatabase.users){
-            if(Objects.equals(u.name, userName.getText())) {
+        for (User u : UserDatabase.users) {
+            if (Objects.equals(u.name, userName.getText())) {
                 searched = u;
                 removeVip.setVisible(true);
                 ban.setVisible(true);
-                showMessage.setText("Found: "+ userName.getText());
+                giveVIP.setVisible(true);
+                showMessage.setText("Found: " + userName.getText());
                 showMessage.setVisible(true);
                 found = true;
             }
-            }
-        if(!found) {
-            showMessage.setText("Not found: "+ userName.getText());
+        }
+        if (!found) {
+            showMessage.setText("Not found: " + userName.getText());
             showMessage.setVisible(true);
             removeVip.setVisible(false);
             ban.setVisible(false);
         }
     }
 
-    @FXML
-    protected void onBanClick(){
-        searched.ban = true;
-        showMessage.setText(userName.getText() + " has ben banned");
+    void addVIP() {
+        if (searched.myID == IDs.Bacis) {
+            searched.VIP = true;
+            searched.myID = IDs.VIPs;
+            float value = searched.wallet.value;
+            searched.wallet = new VIPWallet();
+            searched.wallet.value += value;
+            showMessage.setText(userName.getText() + " promoted to VIP");
+            addAdmin = true;
+        } else
+            showMessage.setText(userName.getText() + " already has VIP");
+
         showMessage.setVisible(true);
     }
 
-    @FXML
-    protected void onRemoveVIPClick(){
-        searched.VIP = false;
-        searched.myID = IDs.Bacis;
-        float value = searched.wallet.value;
-        searched.wallet = new BasicWallet();
-        searched.wallet.value += value;
-        showMessage.setText(userName.getText() + " has no longer VIP");
-        showMessage.setVisible(true);
-        removeAdmin = true;
+    void addThis(){
+        ItemDatabase.itemData.add(new Items(userName.getText(), Float.parseFloat(costOfItem.getText())));
+        inform.addAuction(userName.getText());
     }
 
+    void remove(){
 
-    @FXML
-    protected void onReturnButtonClick () {
-        UserDatabase.currActiveUsers.remove(currUser);
-        currUser.online = false;
-        showMessage.setVisible(false);
-        LoginView.actualStage.setScene(IFrame.scene1);
-    }
-
-    @Override
-    public void notifyPls() throws IOException {
-        scene.getScene("noLongerVIP", "Not sorry");
     }
 }

@@ -39,7 +39,46 @@ public class PaymentController {
 
     @FXML
     protected void onPayButtonClick() throws IOException {
+        pay();
+    }
 
+    @FXML
+    protected void onReturnButtonClick() throws IOException {
+     returnB();
+    }
+
+
+    boolean controlSymbols(String arr) {
+        for (int i = 0; i < arr.length(); i++) {
+            char a = arr.charAt(i);
+            if ((a < '0') || (a > '9'))
+                return false;
+        }
+        return true;
+    }
+
+    void add_Money() {
+        if(controlSymbols(addMoney.getText())) {
+            LogInControler.currUser.wallet.addToWallet(Integer.parseInt(addMoney.getText()));
+            System.out.println(LogInControler.currUser.wallet.value);
+        }
+    }
+
+    void returnB() throws IOException {
+        if (pay) {
+            if (LogInControler.currUser.myID == IDs.Bacis) {
+                scene.stage.setScene(scene.getScene("workScene"));
+            } else if (LogInControler.currUser.myID == IDs.VIPs) {
+                scene.stage.setScene(scene.getScene("workSceneForVIP"));
+            }
+        } else
+            LoginView.actualStage.setScene(IFrame.scene1);
+
+        pay = false;
+
+    }
+
+    void pay() throws IOException {
         if (controlSymbols(cardCode.getText()) && controlSymbols(cardID.getText())) {
             if ((cardID.getText().length() < 5)) {
 
@@ -64,37 +103,6 @@ public class PaymentController {
                 scene.getScene("payment suc", "YOU DID IT");
             }
         } else scene.getScene("payment fail", "EPIC FAIL");
-    }
-
-    @FXML
-    protected void onReturnButtonClick() throws IOException {
-        if (pay) {
-            if (LogInControler.currUser.myID == IDs.Bacis) {
-                scene.stage.setScene(scene.getScene("workScene"));
-            } else if (LogInControler.currUser.myID == IDs.VIPs) {
-                scene.stage.setScene(scene.getScene("workSceneForVIP"));
-            }
-        } else
-            LoginView.actualStage.setScene(IFrame.scene1);
-
-        pay = false;
-
-    }
-
-    boolean controlSymbols(String arr) {
-        for (int i = 0; i < arr.length(); i++) {
-            char a = arr.charAt(i);
-            if ((a < '0') || (a > '9'))
-                return false;
-        }
-        return true;
-    }
-
-    void add_Money() {
-        if(controlSymbols(addMoney.getText())) {
-            LogInControler.currUser.wallet.addToWallet(Integer.parseInt(addMoney.getText()));
-            System.out.println(LogInControler.currUser.wallet.value);
-        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.User;
 
 
 import com.example.AppUtils.IDs;
+import com.example.Items.Items;
 import com.example.wallet.BasicWallet;
 import com.example.wallet.Wallet;
 
@@ -18,6 +19,7 @@ public class User  {
     public boolean ban = false;
     public IDs myID;
     public Wallet wallet = new BasicWallet();
+    public ArrayList<Items> myItems = new ArrayList<>();
 
     public User(String name, String password, String Email, IDs id){
         this.name = name;
@@ -25,5 +27,6 @@ public class User  {
         this.password = password;
         this.myID = id;
     }
+
 }
 
