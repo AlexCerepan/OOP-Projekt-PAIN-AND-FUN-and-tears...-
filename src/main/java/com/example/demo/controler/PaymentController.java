@@ -60,6 +60,7 @@ public class PaymentController {
     void add_Money() {
         if(controlSymbols(addMoney.getText())) {
             LogInControler.currUser.wallet.addToWallet(Integer.parseInt(addMoney.getText()));
+            LogInControler.currUser.onWallet = Integer.parseInt((addMoney.getText()));
             System.out.println(LogInControler.currUser.wallet.value);
         }
     }

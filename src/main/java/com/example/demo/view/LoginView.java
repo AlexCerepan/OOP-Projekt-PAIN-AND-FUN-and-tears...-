@@ -8,6 +8,10 @@ import com.example.User.User;
 import com.example.User.UserDatabase;
 import com.example.demo.Scenes;
 import com.example.demo.controler.LogInControler;
+import com.example.serialize.Deserialize;
+import com.example.serialize.Serialize;
+import com.example.wallet.BasicWallet;
+import com.example.wallet.VIPWallet;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -18,12 +22,13 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.example.AppUtils.SetScene.stage;
 
 
 public class LoginView extends Application implements IFrame {
-
+   static Serialize s;
     public static Stage actualStage = null;
 
     public Button logInButton = new Button("Log in");
@@ -112,6 +117,16 @@ public class LoginView extends Application implements IFrame {
        });
 
        actualStage.show();
+       actualStage.setOnCloseRequest(e->{
+           s = new Serialize();
+           for(User user : UserDatabase.users){
+               s.serialize_databaseInList(user);
+           }
+           for(Items item : ItemDatabase.itemData){
+               s.serialize_databaseInList(item);
+           }
+           s.serializeUsers();
+       });
     }
 
 
@@ -191,9 +206,27 @@ public class LoginView extends Application implements IFrame {
     }
 
     public static void main(String[] args) {
-
-
-
+        System.out.println("hello");
+           String users;
+           String items;
+           Deserialize des = new Deserialize();
+           items = des.readFileAsString("C:\\Users\\cerko\\OneDrive\\Desktop\\2 rocnik\\LS\\DSA\\demo\\src\\main\\java\\com\\example\\serialize\\ItemsSave.json");
+           users = des.readFileAsString("C:\\Users\\cerko\\OneDrive\\Desktop\\2 rocnik\\LS\\DSA\\demo\\src\\main\\java\\com\\example\\serialize\\UsersSave.json");
+        System.out.println(users.length());
+                s = new Serialize();
+               User[] arr = s.g.fromJson(users, User[].class);
+               Items[] arr2 = s.g.fromJson(items, Items[].class);
+               for (User a : arr) {
+                   if (a.VIP) {
+                       a.wallet = new VIPWallet();
+                       a.wallet.addToWallet(a.onWallet);
+                   } else {
+                       a.wallet = new BasicWallet();
+                       a.wallet.addToWallet(a.onWallet);
+                   }
+               }
+               UserDatabase.users.addAll(List.of(arr));
+               ItemDatabase.itemData.addAll(List.of(arr2));
         launch();
 
     }

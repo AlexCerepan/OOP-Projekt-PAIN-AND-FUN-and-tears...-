@@ -4,4 +4,6 @@ public abstract class Wallet {
     public float value;
 
     public void addToWallet(float num){}
+
+    public float getValue(){return value;}
 }

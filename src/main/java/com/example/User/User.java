@@ -18,13 +18,15 @@ public class User  {
     public boolean admin = false;
     public boolean ban = false;
     public IDs myID;
-    public Wallet wallet = new BasicWallet();
+    public transient Wallet wallet = new BasicWallet();
+    public float onWallet;
     public ArrayList<Items> myItems = new ArrayList<>();
 
     public User(String name, String password, String Email, IDs id){
         this.name = name;
         this.Email = Email;
         this.password = password;
+        this.onWallet = this.wallet.value;
         this.myID = id;
     }
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo.controler.MyItemsController" style="-fx-background-color: #89CFF0 " >
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+<Button fx:id="show" text="Show my Items" onAction="#onShowButtonClick" style="-fx-background-color: #dcd0ff"/>
+<TextArea fx:id="area" visible="false" style="-fx-font-family: 'Comic Sans MS'; fx-font-size: 20"/>
+    <Button fx:id="close" text="Close" onAction="#onCloseButtonClick" style="-fx-background-color: #dcd0ff"/>
+
+</VBox>

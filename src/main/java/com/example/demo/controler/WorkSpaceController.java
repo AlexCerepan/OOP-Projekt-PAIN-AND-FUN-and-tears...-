@@ -1,8 +1,8 @@
 package com.example.demo.controler;
 
-import com.example.AppUtils.AdminInform;
-import com.example.AppUtils.Com;
 import com.example.AppUtils.SetScene;
+import com.example.Items.ItemDatabase;
+import com.example.Items.Items;
 import com.example.User.UserDatabase;
 import com.example.demo.Scenes;
 import com.example.demo.view.IFrame;
@@ -19,8 +19,11 @@ import static com.example.demo.controler.LogInControler.currUser;
 public class WorkSpaceController
 {
 
-    Notify notify = new AuctionMenuController();
     SetScene scene = new Scenes();
+
+    @FXML
+    Button myItems;
+
     @FXML
     Button goToAuction;
 
@@ -43,6 +46,11 @@ public class WorkSpaceController
     @FXML
     protected void onaddMoneyClick() throws IOException {
         pay();
+    }
+
+    @FXML
+    protected void onMyItemsClick() throws IOException {
+        myItemsShow();
     }
 
 
@@ -79,11 +87,15 @@ public class WorkSpaceController
 
     void startAuctions() throws IOException {
         Scenes.stage.setScene(scene.getScene("auctionChoose"));
+        ControlerManagment.auctionMenuControllerDatabase.add(Scenes.ldr.getController());
         currC = Scenes.ldr.getController();
-        currC.comboBox.getItems().addAll("Zlato", "Diamant", "Strieborna podkolienka");
+        for(Items a : ItemDatabase.itemData)
+            currC.comboBox.getItems().add(a.name);
         System.out.println(currC);
-        notify.notifyPls();
 
+    }
+    public void myItemsShow() throws IOException {
+      scene.getScene("Items", "My Items");
     }
 
 }

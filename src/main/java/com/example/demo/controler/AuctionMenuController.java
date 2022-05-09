@@ -2,6 +2,8 @@ package com.example.demo.controler;
 
 import com.example.AppUtils.IDs;
 import com.example.AppUtils.SetScene;
+import com.example.Items.ItemDatabase;
+import com.example.Items.Items;
 import com.example.demo.Auction.Auction;
 import com.example.demo.Scenes;
 import javafx.fxml.FXML;
@@ -14,15 +16,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.example.demo.controler.AdminController.activeAuc;
 
-public class AuctionMenuController implements Notify{
+public class AuctionMenuController implements Notify {
 
-public static AuctionMenuController currC;
-
- SetScene scene = new Scenes();
- AucItem getItem = new AuctionController();
- Notify getname = new AuctionController();
+    public static AuctionMenuController currC;
+    Items selingItem;
+    SetScene scene = new Scenes();
 
     @FXML
     Button show;
@@ -40,7 +39,7 @@ public static AuctionMenuController currC;
     public ComboBox<String> comboBox;
 
     @FXML
-    protected void onShowButtonClick(){
+    protected void onShowButtonClick() {
         System.out.println("mali by sa pridat itemy");
         comboBox.getItems().add("prasa");
     }
@@ -48,63 +47,58 @@ public static AuctionMenuController currC;
     @FXML
     protected void onReturnButtonClick() throws IOException {
         currC.returnB();
-        Notify.menuControllers.remove(currC);
+
+
     }
 
 
     @FXML
     protected void onStartClick() throws IOException {
-        currC.startAuction();
+        startAuction();
     }
 
     @FXML
-    protected void onBoxClick(){
+    protected void onBoxClick() {
         System.out.println("I choose " + comboBox.getValue());
     }
 
 
-
-
     public void startAuction() throws IOException {
-        if(Objects.equals(comboBox.getValue(), null)) {
+        if (Objects.equals(comboBox.getValue(), null)) {
             show2.setVisible(true);
             show2.setText("You have to choose an auction first");
-        }
-        else {
-            FXMLLoader load = new FXMLLoader(Scenes.class.getResource("auction.fxml"));
-            Stage start = new Auction(load, "Welcome!");
-            activeAuc.add(start);
-            for (AuctionController a : Notify.controlers) {
-                //   System.out.println("Kontrolery :" + a);
-                System.out.println(getItem);
-                AuctionController.currC = a;
-                getItem.notifypls(comboBox.getValue(), a);
-                currC.notifyPls();
-                //  System.out.println("mal by som notifinut kontrolery: " + a);
+        } else {
+
+            for(Items i : ItemDatabase.itemData){
+                if(i.name.equals(comboBox.getValue())) {
+                    selingItem = i;
+                    break;
+                }
             }
+            FXMLLoader load = new FXMLLoader(Scenes.class.getResource("auction.fxml"));
+            Stage start = new Auction(load, "Welcome!", selingItem);
+            ControlerManagment.auctionDatabase.add((Auction) start);
+            ControlerManagment.auctionControllerDatabase.add((((Auction) start).loader.getController()));
+            ControlerManagment.auctionDatabase.get(ControlerManagment.auctionDatabase.size()-1).items = selingItem;
+            ControlerManagment.auctionControllerDatabase.get(ControlerManagment.auctionControllerDatabase.size()-1).item = selingItem;
+            ControlerManagment.auctionControllerDatabase.get(ControlerManagment.auctionControllerDatabase.size()-1).showWhatIsSelling(selingItem.name, selingItem.cost);
         }
-     //   System.out.println("---------------------------------------");
+        //   System.out.println("---------------------------------------");
 
     }
-
-
-
-
 
 
     public void returnB() throws IOException {
-            if (LogInControler.currUser.myID == IDs.Bacis) {
-                scene.stage.setScene(scene.getScene("workScene"));
-            } else if (LogInControler.currUser.myID == IDs.VIPs) {
-                scene.stage.setScene(scene.getScene("workSceneForVIP"));
-            }
+        if (LogInControler.currUser.myID == IDs.Bacis) {
+            scene.stage.setScene(scene.getScene("workScene"));
+        } else if (LogInControler.currUser.myID == IDs.VIPs) {
+            scene.stage.setScene(scene.getScene("workSceneForVIP"));
+        }
     }
 
 
-
-
     public void notifyPls() throws IOException {
-        System.out.println(currC);
-        menuControllers.add(this);
+        currC.comboBox.getItems().remove(selingItem.name);
+        ItemDatabase.itemData.remove(selingItem);
     }
 }

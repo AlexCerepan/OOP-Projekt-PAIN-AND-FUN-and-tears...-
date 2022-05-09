@@ -14,6 +14,7 @@
     <Button fx:id="show" onAction="#onShowButtonClick" style="-fx-background-color: #dcd0ff " text="Show wallet balance" />
     <Button fx:id="hide" onAction="#onHideButtonClick" style="-fx-background-color: #dcd0ff " text="Hide balance" />
     <Button fx:id="addMoney" onAction="#onaddMoneyClick" style="-fx-background-color: #dcd0ff " text="Add Money" />
+    <Button fx:id="myItems" text="My Items" onAction="#onMyItemsClick" style="-fx-background-color: #dcd0ff"/>
     <Button fx:id="returnB" onAction="#onReturnButtonClick" style="-fx-background-color: #dcd0ff " text="Log Out" />
 
     <Label fx:id="urMoney" style="-fx-font-family: 'Comic Sans MS' ; -fx-font-size: 15px" textFill="blueviolet" visible="false" />

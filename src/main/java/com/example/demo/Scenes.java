@@ -87,6 +87,11 @@ public class Scenes implements SetScene {
             return;
         }
 
+        else if("Items".equals(nameOfScene)){
+            FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("myItems.fxml"));
+            scene = new Scene(loader.load(), 500,500);
+        }
+
         window.setTitle(title);
         window.setScene(scene);
         window.showAndWait();
