@@ -183,7 +183,7 @@ private boolean SaveDownCast() {
     public void createAdmin(){
         User admin = new User("Alex", "OOPisBest", "zahradka@juchu.fx", IDs.Admin );
         admin.admin = true;
-
+        users.add(admin);
         tree.insert(admin.name);
     }
 }

@@ -78,8 +78,10 @@ public class AdminController implements Notify {
     }
 
 
+
     @FXML
     protected void onAddAucClick() {
+        remAuc.setVisible(true);
         userName.setVisible(true);
         userName.setPromptText("add or remove Item");
         costOfItem.setVisible(true);
@@ -88,7 +90,7 @@ public class AdminController implements Notify {
 
     @FXML
     protected void onRemoveAucClick() throws IOException {
-        inform.removeAuction(userName.getText());
+        remove();
     }
 
     @FXML
@@ -209,6 +211,12 @@ public class AdminController implements Notify {
     }
 
     void remove(){
-
+        inform.removeAuction(userName.getText());
+        for(Items a : ItemDatabase.itemData){
+            if(a.name.equals(userName.getText())){
+                ItemDatabase.itemData.remove(a);
+                break;
+            }
+        }
     }
 }

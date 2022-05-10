@@ -1,12 +1,7 @@
 package com.example.serialize;
 
-import com.example.AppUtils.IDs;
-import com.example.Items.ItemDatabase;
 import com.example.Items.Items;
 import com.example.User.User;
-import com.example.User.UserDatabase;
-import com.example.wallet.BasicWallet;
-import com.example.wallet.VIPWallet;
 import com.google.gson.Gson;
 
 import java.io.FileWriter;
@@ -57,51 +52,7 @@ public class Serialize <T>{
             System.out.println("WTF nezapisalo");
         }
 
-        System.out.println(listUsers);
-        System.out.println(listTovars);
-        System.out.println();
-      /*  for(T item : listTovar){
-            listTovars.add(g.toJson(item));
-        }*/
-    }
-
-    public static void main(String[] args) {
-        //UserDatabase.users.add(new User("jozo", "papa", "kokoooooot", IDs.Bacis));
-       // UserDatabase.users.get(0).onWallet = 500;
-
-        ItemDatabase.itemData.add(new Items("papuca", 555));
-        ItemDatabase.itemData.add(new Items("papagaj", 5555));
-        ItemDatabase.itemData.add(new Items("pamapa", 55555));
-       // UserDatabase.users.get(0).myItems.add(new Items("kravata", 500));
-        //UserDatabase.users.get(0).myItems.add(new Items("krava", 700));
-        Deserialize d = new Deserialize();
-        String k;
-        k = d.readFileAsString("C:\\Users\\cerko\\OneDrive\\Desktop\\2 rocnik\\LS\\DSA\\demo\\src\\main\\java\\com\\example\\serialize\\UsersSave.json");
-        System.out.println(k.length());
-        String l;
-        Serialize s = new Serialize();
-        for(User u : UserDatabase.users)
-                s.serialize_databaseInList(u);
-        for(Items i : ItemDatabase.itemData)
-                s.serialize_databaseInList(i);
-
-        s.serializeUsers();
-        l = d.readFileAsString("C:\\Users\\cerko\\OneDrive\\Desktop\\2 rocnik\\LS\\DSA\\demo\\src\\main\\java\\com\\example\\serialize\\ItemsSave.json");
-        User[] arr = s.g.fromJson(k,User[].class);
-        Items[] arr2 = s.g.fromJson(l,Items[].class);
-        for(User a : arr){
-            if(a.VIP) {
-                a.wallet = new VIPWallet();
-                a.wallet.addToWallet(a.onWallet);
-            }
-
-            else{
-                a.wallet = new BasicWallet();
-                a.wallet.addToWallet(a.onWallet);
-            }
-        }
-        System.out.println(arr[0].wallet.value);
-        System.out.println(arr2[0].cost);
 
     }
+
 }

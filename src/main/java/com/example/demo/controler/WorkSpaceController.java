@@ -89,8 +89,14 @@ public class WorkSpaceController
         Scenes.stage.setScene(scene.getScene("auctionChoose"));
         ControlerManagment.auctionMenuControllerDatabase.add(Scenes.ldr.getController());
         currC = Scenes.ldr.getController();
-        for(Items a : ItemDatabase.itemData)
+        int size = currC.comboBox.getItems().size();
+        System.out.println(size);
+    for(Items a : ItemDatabase.itemData) {
+            if(size > 8)
+                break;
             currC.comboBox.getItems().add(a.name);
+            size++;
+        }
         System.out.println(currC);
 
     }

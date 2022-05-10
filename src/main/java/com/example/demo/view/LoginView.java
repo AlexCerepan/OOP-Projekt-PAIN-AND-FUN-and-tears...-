@@ -216,10 +216,12 @@ public class LoginView extends Application implements IFrame {
                 s = new Serialize();
                User[] arr = s.g.fromJson(users, User[].class);
                Items[] arr2 = s.g.fromJson(items, Items[].class);
+               if(arr != null){
                for (User a : arr) {
                    if (a.VIP) {
                        a.wallet = new VIPWallet();
                        a.wallet.addToWallet(a.onWallet);
+
                    } else {
                        a.wallet = new BasicWallet();
                        a.wallet.addToWallet(a.onWallet);
@@ -227,6 +229,7 @@ public class LoginView extends Application implements IFrame {
                }
                UserDatabase.users.addAll(List.of(arr));
                ItemDatabase.itemData.addAll(List.of(arr2));
+               }
         launch();
 
     }

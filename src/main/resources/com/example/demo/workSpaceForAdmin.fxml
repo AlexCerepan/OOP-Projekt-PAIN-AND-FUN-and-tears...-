@@ -12,9 +12,10 @@
     <Label fx:id="showMessage" style="-fx-font-size:20" visible="false"/>
     <Label text="Status: Admin" style="-fx-font-size:20"/>
     <Button fx:id="findUser" onAction="#onFindUserClick" style="-fx-background-color: #dcd0ff " text="Find user" />
+    <Button fx:id="addAuc" text="Add AUC" onAction="#onAddAucClick" style="-fx-background-color: #dcd0ff "/>
+    <Button fx:id="remAuc" text="Remove AUC" onAction="#onRemoveAucClick" style="-fx-background-color: #dcd0ff " visible="false"/>
     <TextField fx:id="userName" promptText="Add or remove AUC" visible="false" />
     <TextField fx:id="costOfItem" promptText="Value of item" visible="false"/>
-    <Button fx:id="addAuc" text="Add AUC" onAction="#onAddAucClick" style="-fx-background-color: #dcd0ff "/>
     <Button fx:id="addthis" text="Confirm" onAction="#onAddThisClick" style="-fx-background-color: #dcd0ff" visible="false"/>
     <Button fx:id="search" onAction="#onSearchClick" style="-fx-background-color: #dcd0ff" text="Search"/>
     <Button fx:id="giveVIP" onAction="#onAddVIPClick" style="-fx-background-color: #dcd0ff" text="Give VIP" visible="false"/>

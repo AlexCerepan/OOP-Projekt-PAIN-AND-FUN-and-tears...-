@@ -1,6 +1,5 @@
 package com.example.AppUtils;
 
-import com.example.demo.view.LoginView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

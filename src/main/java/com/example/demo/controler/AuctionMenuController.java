@@ -6,6 +6,7 @@ import com.example.Items.ItemDatabase;
 import com.example.Items.Items;
 import com.example.demo.Auction.Auction;
 import com.example.demo.Scenes;
+import com.example.demo.myExeption.MyException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -53,7 +54,7 @@ public class AuctionMenuController implements Notify {
 
 
     @FXML
-    protected void onStartClick() throws IOException {
+    protected void onStartClick() throws IOException, MyException {
         startAuction();
     }
 
@@ -64,10 +65,16 @@ public class AuctionMenuController implements Notify {
 
 
     public void startAuction() throws IOException {
+
         if (Objects.equals(comboBox.getValue(), null)) {
-            show2.setVisible(true);
-            show2.setText("You have to choose an auction first");
-        } else {
+            try{
+                throw new MyException();
+            }catch(MyException e){
+                e.throwThat();
+            }
+
+        }
+        else {
 
             for(Items i : ItemDatabase.itemData){
                 if(i.name.equals(comboBox.getValue())) {

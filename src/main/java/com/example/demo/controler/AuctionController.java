@@ -1,14 +1,15 @@
 package com.example.demo.controler;
 
+import com.example.AppUtils.SetScene;
 import com.example.Items.ItemDatabase;
 import com.example.Items.Items;
 import com.example.demo.Auction.Auction;
+import com.example.demo.Scenes;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import static com.example.demo.controler.LogInControler.currUser;
 
@@ -18,7 +19,7 @@ public class AuctionController implements AucItem {
     public static AuctionController currC;
     public Items item;
     boolean endAuction;
-
+    public SetScene scene = new Scenes();
 
     @FXML
     Button show;
@@ -42,7 +43,7 @@ public class AuctionController implements AucItem {
     }
 
     @FXML
-    protected void onBidButtonClick() throws IOException {
+    protected void onBidButtonClick() throws IOException{
         addMoney();
     }
 
@@ -61,12 +62,13 @@ public class AuctionController implements AucItem {
        }
    }
 
-    void addMoney() throws IOException {
+    void addMoney() throws IOException{
         // prerobene
         Auction currA = null;
         for (Auction a : ControlerManagment.auctionDatabase) {
             if (a.loader.getController() == this) {
                 currA = a;
+
             }
         }
         if(Objects.equals(value.getText(), "")) {
@@ -90,14 +92,6 @@ public class AuctionController implements AucItem {
 
         }
 
-
-             /*   if (this.item.cost < Integer.parseInt(value.getText())) {
-
-                    currUser.myItems.add(this.item);
-                    AuctionMenuController.currC.notifyPls();
-                   noMoney.setText("you bought: " + this.item.name);
-
-                }*/
             }
 
 
