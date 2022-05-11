@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/**
+ * alertboxi ktore sluzia na upozornovanie
+ * */
 public class AllertBox  {
     SetScene usage = new Scenes();
     @FXML
@@ -20,6 +23,9 @@ public class AllertBox  {
     @FXML
     Button close;
 
+    /**
+     * metoda zatvara okno
+     * */
     @FXML
     protected void onCloseButton(){
         usage.forAlert.close();

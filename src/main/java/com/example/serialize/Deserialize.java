@@ -8,10 +8,19 @@ import java.nio.file.Paths;
 public class Deserialize {
 
     public Deserialize(){
-        MyThread mt = new MyThread(10000);
+        MyThread mt = new MyThread();
         new Thread(mt::create_Items).start();
     }
 
+    /**
+     *
+     * dana funkcia mi sluzi na vybratie dat zo suboru aby som ich mohol deserializovat
+     *
+     * @param fileName tento vstup sluzi na identifikovanie z akeho suboru chcem vyberat data
+     *
+     * @return vraciam string dat ktore chcem nasledne deserializovat alebo ak sa mi to nepodari tak null
+     *
+     * **/
    public String readFileAsString(String fileName)
     {
         try {

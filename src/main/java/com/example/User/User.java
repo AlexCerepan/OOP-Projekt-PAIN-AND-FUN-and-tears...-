@@ -7,7 +7,12 @@ import com.example.wallet.BasicWallet;
 import com.example.wallet.Wallet;
 
 import java.util.ArrayList;
-
+/**
+ *
+ * class user mi predstavuje ludi ktory su na aukcii
+ * kazdy user má svoje meno, heslo a mail ako aj penazenku a list itemov ktore vlastni
+ * ma aj flagy ktore oznacuju vlastnosti alebo ako sa k nemu program má spravat
+ * **/
 public class User  {
 
     public String Email;

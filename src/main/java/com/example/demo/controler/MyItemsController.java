@@ -18,12 +18,17 @@ public class MyItemsController {
 
     @FXML
     Button close;
-
+/**
+ * pri stlaceni buttonu show sa ukaze textarea ktora obsahuje vypis predmetov ktore vlastni dany
+ * pouzivatel a ich cenu
+ * */
     @FXML
     protected void onShowButtonClick(){
         showItems();
     }
-
+ /***
+  * pri stlaceni return sa zavrie dane okno
+  * */
     @FXML
     protected void onCloseButtonClick(){
         usage.forAlert.close();

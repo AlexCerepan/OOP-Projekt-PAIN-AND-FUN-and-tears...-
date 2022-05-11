@@ -14,17 +14,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.example.demo.controler.LogInControler.currUser;
 
 public class AdminController implements Notify {
 
-    public static ArrayList<Stage> activeAuc = new ArrayList<>();
 
     public static boolean removeAdmin = false;
     public static boolean addAdmin = false;
@@ -71,14 +68,19 @@ public class AdminController implements Notify {
     @FXML
     TextField userName;
 
-
+    /**
+     * v tejto metode moze admin pridavat predmety na drazenie predmet sa prida do vyberu pouzivatela
+     * a zaroven aj do databazy
+     * */
     @FXML
     protected void onAddThisClick(){
         addThis();
     }
 
 
-
+/**
+ * funkcia zobrazi polia do ktorych mozno vpisat naázov a cenu tovaru
+ * **/
     @FXML
     protected void onAddAucClick() {
         remAuc.setVisible(true);
@@ -88,11 +90,21 @@ public class AdminController implements Notify {
         addthis.setVisible(true);
     }
 
+    /**
+     *
+     * v danej funkcii admin moze odstránit predmet z drazby ako aj z databazy takze dany predmet uz nebude
+     * mozne zakupit
+     *
+     **/
     @FXML
-    protected void onRemoveAucClick() throws IOException {
+    protected void onRemoveAucClick(){
         remove();
     }
 
+    /**
+     *
+     * metoda sluzi na spristupnenie fieldu na pisanie pre najdenie pouzivatela
+     * */
     @FXML
     protected void onFindUserClick() {
         userName.setVisible(true);
@@ -100,35 +112,54 @@ public class AdminController implements Notify {
         userName.setPromptText("Find User");
     }
 
+
+    /**
+     * po stlaceni tlacidla search vyhodnoti dana metada ci dany pouzivatel existuje
+     * */
     @FXML
     protected void onSearchClick() {
         search();
     }
-
+    /**
+     * ak sa pouzivatel existuje dana metada umoznuje adminovy ho zabanovat takze sa uz nebude moct prihlásit
+     * */
     @FXML
     protected void onBanClick() {
         ban();
     }
-
+    /**
+     * ak sa pouzivatel existuje dana metoda umoznuje adminovy mu odobrat VIP status
+     * */
     @FXML
     protected void onRemoveVIPClick() {
         removeVIP();
     }
 
+    /**
+     * ak sa pouzivatel existuje dana metada umoznuje adminovy mu dat VIP status
+     * */
     @FXML
     protected void onAddVIPClick() {
         addVIP();
     }
 
-
+    /**
+     * dana funkcia zatvori okno pre admina po stlaceni tlacidla return
+     * **/
     @FXML
     protected void onReturnButtonClick() {
         returnB();
     }
 
+    /**
+     * ak admin niekomu odoberie alebo da VIP status pri naslednom prihláseni mu zobrazi okno v ktorom
+     * je pouzivatel informovany o danej akcii
+     *
+     * @throws IOException ak sa nenajde fxml subor
+     *
+     * */
     @Override
     public void notifyPls() throws IOException {
-        System.out.println("som v notify pls pri addadmin a addadmin je: " + addAdmin);
         if (addAdmin) {
             scene.getScene("noLongerVIP2", "Good for you");
         }

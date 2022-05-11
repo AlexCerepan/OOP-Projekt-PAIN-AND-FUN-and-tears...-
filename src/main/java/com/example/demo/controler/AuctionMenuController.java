@@ -24,8 +24,6 @@ public class AuctionMenuController implements Notify {
     Items selingItem;
     SetScene scene = new Scenes();
 
-    @FXML
-    Button show;
 
     @FXML
     Button start;
@@ -39,22 +37,29 @@ public class AuctionMenuController implements Notify {
     @FXML
     public ComboBox<String> comboBox;
 
-    @FXML
-    protected void onShowButtonClick() {
-        System.out.println("mali by sa pridat itemy");
-        comboBox.getItems().add("prasa");
-    }
 
+    /**
+     * v tejto funkcii sa vraciam po stlaceni tlacidla do predchadzajuceho view teda pracovneho pre
+     * pouzivatela
+     *
+     * @throws IOException ak sa nenajde fxml subor
+     * */
     @FXML
     protected void onReturnButtonClick() throws IOException {
         currC.returnB();
-
-
     }
 
+    /**
+     * v tejto funkcii sa po vybrati tovaru o ktory sa chcem uchadzat nastavy okno aukcie kde mozem
+     * na dany tovar prihadzovat ak si nevyberiem tovar zobrazi sa mi okno ze si najprv musim vybrat tovar
+     * az potom mozem pokracovat
+     *
+     * @throws IOException ak sa nenajde fxml subor
+     *
+     * */
 
     @FXML
-    protected void onStartClick() throws IOException, MyException {
+    protected void onStartClick() throws IOException {
         startAuction();
     }
 
@@ -103,8 +108,10 @@ public class AuctionMenuController implements Notify {
         }
     }
 
-
-    public void notifyPls() throws IOException {
+/**
+ * metoda ktora zachyti ci sa dany tovar predal a ak ano vyradi sa z listu tovarov na drazenie ako aj z databazy
+ * */
+    public void notifyPls() {
         currC.comboBox.getItems().remove(selingItem.name);
         ItemDatabase.itemData.remove(selingItem);
     }

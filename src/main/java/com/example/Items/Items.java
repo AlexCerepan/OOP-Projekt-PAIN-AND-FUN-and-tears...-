@@ -1,5 +1,9 @@
 package com.example.Items;
 
+/**
+ * class items vytvara predmety ktore je možne nasledne predavat
+ *
+ * **/
 public class Items {
 
    public String name;

@@ -4,14 +4,16 @@ import com.example.Items.ItemDatabase;
 import com.example.Items.Items;
 import java.util.Random;
 
+
+/**
+ * vyrvoril som si Thread v ktorom sa mi budu vytvarat itemy
+ * */
 public class MyThread extends Thread{
 
-    public int n;
 
-    public MyThread (int n){
-        this.n = n;
-    }
-
+    /**
+     * v tejto metode vytvaram itemy ktore sa nasledne pri deserializacii pridaju do "databazy" itemov
+     **/
     public void create_Items(){
         String[] names_for_retiazka = new String[7];
         names_for_retiazka[0] = "Zlata ";

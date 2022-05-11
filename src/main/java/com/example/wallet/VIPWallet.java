@@ -1,5 +1,7 @@
 package com.example.wallet;
-
+/**
+ * 8
+ * */
 public class VIPWallet extends Wallet{
 
    public void addToWallet(float num){

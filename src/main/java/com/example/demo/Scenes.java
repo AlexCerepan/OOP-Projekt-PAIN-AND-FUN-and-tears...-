@@ -7,12 +7,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/***
+ *
+ * vytvaranie scen
+ * */
 public class Scenes implements SetScene {
 
     public static boolean pay = false;
     public static FXMLLoader loader;
     public static FXMLLoader ldr;
 
+    /**
+     * tato funkcia slzii na vyberanie scen pre hlavny stage priradzuje im kontroler, ktory najprv vytvori
+     * podobna funkcia ako "void getScene"
+     *
+     * @param nameOfScene tento parameter sluzi na vybratie typu sceny ktora ma nasledovat
+     *
+     * @throws IOException ak sa nedostanem k fxml suboru vyhodi sa mi exception
+     *
+     * @return vracia danu scenu ktora sa potom nastavy aby bola zobrazena
+     * */
     public Scene getScene(String nameOfScene) throws IOException {
 
         if("workScene".equals(nameOfScene)) {
@@ -27,10 +41,6 @@ public class Scenes implements SetScene {
             FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("workSpaceForVIP.fxml"));
             return new Scene(loader.load(), 500, 500);
         }
-       /* else if("workSceneForAdmin".equals(nameOfScene)){
-            FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("workSpaceForAdmin.fxml"));
-            return new Scene(loader.load(), 500, 700);
-        }*/
         else if("addMoney".equals(nameOfScene)){
             FXMLLoader loader = new FXMLLoader(Scenes.class.getResource("addMoney.fxml"));
             pay = true;
@@ -47,6 +57,18 @@ public class Scenes implements SetScene {
 
     }
 
+    /**
+     * Tato funkcia slzii na zistenie a nastavenie scneny ktora sa ma vytvorit primarne pre
+     * alerty nema návratovu hodnotu a rovno aj zobrazi okno alertu
+     *
+     * @param nameOfScene tento parameter sluzi na vybratie spravneho fxml suboru ktorý mi
+     *                    vytvori nasledne scenu
+     *
+     * @param title priradi danenu GUI title
+     *
+     * @throws IOException ak sa nedostane ku fxml suboru
+     *
+     * **/
     @Override
     public void getScene(String nameOfScene, String title) throws IOException {
 

@@ -42,34 +42,58 @@ public class WorkSpaceController
     @FXML
     Button addMoney;
 
-
+/**
+ * tato funkcia sa zavola po stlaceni tlacidla addMoney
+ *
+ * @throws IOException ak sa nedostanem k fxml suboru
+ * **/
     @FXML
     protected void onaddMoneyClick() throws IOException {
         pay();
     }
 
+    /**
+     * po stlaceni tlacidla my items otvori okno s predmetmi ktore dany pouzivatel vlastni
+     *
+     * @throws IOException ak sa nedostanem k fxml suboru
+     * */
     @FXML
     protected void onMyItemsClick() throws IOException {
         myItemsShow();
     }
 
 
+    /**
+     * tato metoda zobrazi vo view hodnotu ktoru ma dany pouzivatel prave na ucte
+     * */
     @FXML
     protected void onShowButtonClick (){
         urMoney.setVisible(true);
         urMoney.setText("Wallet blance: " + currUser.wallet.value);
     }
+
+    /**
+     * v tejto metode mozem stav mojich financii znova skryt
+     * */
     @FXML
     protected void onHideButtonClick (){
         urMoney.setVisible(false);
     }
 
-
+    /**
+     * funkcia ktora vracia pouzivatela naspat na login
+     * */
     @FXML
     protected void onReturnButtonClick () {
         returnBc();
     }
 
+    /**
+     * pri stlaceni tlacidla start sa vykona dana funkcia ktora nas dostane na scenu kde si mozeme vyberat
+     * co chceme ist kupovat
+     *
+     * @throws IOException ak sa nenajde fxml subor
+     * */
     @FXML
     protected void goToAuctionClick() throws IOException {
         startAuctions();

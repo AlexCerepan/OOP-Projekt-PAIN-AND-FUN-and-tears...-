@@ -26,7 +26,9 @@ import java.util.List;
 
 import static com.example.AppUtils.SetScene.stage;
 
-
+/**
+ * classa ktora mi spusta program a ktora zobrazi prve okno
+ * */
 public class LoginView extends Application implements IFrame {
    static Serialize s;
     public static Stage actualStage = null;
@@ -67,6 +69,13 @@ public class LoginView extends Application implements IFrame {
 
     public static LogInControler controler = null;
 
+    /**
+     * tato funkcia mi zobrazi login moze zmenit scénu na register alebo na kupenie si VIP clenstva
+     *
+     * @param stage vkladam stage ktory chcem aby sa mi zobrazil a v ktorom bude uzivatel nasledne pracovat
+     *
+     * @throws IOException ak sa nedostane k fxml suboru
+     * */
 
    @Override
     public void start(Stage stage) throws IOException {

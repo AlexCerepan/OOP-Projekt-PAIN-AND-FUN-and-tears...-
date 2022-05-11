@@ -15,7 +15,6 @@
     </padding>
     <Label fx:id="show2"  visible="false"/>
     <Button fx:id="start" text="Start" onAction="#onStartClick" style="-fx-background-color: #dcd0ff"  />
-    <Button fx:id="show" text="AddOption" onAction="#onShowButtonClick" style="-fx-background-color: #dcd0ff"  />
     <ComboBox fx:id="comboBox" onAction="#onBoxClick" style="-fx-background-color: #ff6961" promptText="Select Auction Type"/>
     <Button fx:id="returnB" onAction="#onReturnButtonClick" style="-fx-background-color: #dcd0ff" text="Return"/>
 

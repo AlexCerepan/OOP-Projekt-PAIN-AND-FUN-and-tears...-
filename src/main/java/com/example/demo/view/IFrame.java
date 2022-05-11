@@ -12,9 +12,21 @@ public interface IFrame {
     Scene scene2  = new Scene(gridPane2, 400, 400);
     Scene scene3  = new Scene(gridPane3, 400, 400);
 
+    /**
+     * vytvorenie prveho view(Login)
+     * **/
     void setAndeInitialize1();
+    /**
+     * vytvorenie druheho view(Register)
+     * */
     void setAndeInitialize2();
+    /**
+     * vytvorenie tretieho view (platba za VIP clenstvo)
+     * */
     void setAndeInitialize3();
+    /**
+     * priradenie kontroleru pre dane sceny
+     * */
     void Initializecontroller();
 
 }

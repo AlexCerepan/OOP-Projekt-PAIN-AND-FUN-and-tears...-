@@ -6,17 +6,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
-
+/**
+ * class ktora zobrazuje aukcie a ich chod
+ * */
 public class Auction extends Stage {
     public Items items;
     public FXMLLoader loader;
     String title;
     Scene scene;
     Stage thisMe;
-    public int lastBid;
 
     public Auction(){}
     public Auction(FXMLLoader loadr, String titl, Items item) throws IOException {
@@ -35,27 +35,35 @@ public class Auction extends Stage {
         this.show();
     }
 
-
+    /**
+     * funkcia ktora botom pre danu aukciu zhodnocuje poslednu prihodenú ciastku a podla nej sa rozhoduju
+     * kolko prihodia oni
+     *
+     * @param lastBidValue hodnota poslenej prihodenej ciastky
+     *
+     * @return vracia ciastku ktoru prihadzuje bot
+     *
+     * */
     public int botsBid(int lastBidValue){
         int newVal = 0;
         Random random = new Random();
 
         if(lastBidValue <= 1000){
-            if(random.nextInt(100)<90){
+            if(random.nextInt(100)<70){
                 System.out.println("a < 1000 " + newVal);
                 newVal = (lastBidValue + random.nextInt(500));
                 return newVal;
             }
         }
          else if(lastBidValue > 1000 && lastBidValue <= 10000){
-            if(random.nextInt(100)<60){
+            if(random.nextInt(100)<40){
                 System.out.println("1000 < a < 10000 " + newVal);
                 newVal = (lastBidValue + random.nextInt(1000));
                 return newVal;
             }
         }
          else if (lastBidValue > 10000 && lastBidValue <= 100000){
-            if(random.nextInt(100)< 40){
+            if(random.nextInt(100)< 20){
                 newVal = (lastBidValue + random.nextInt(1000));
                 System.out.println("10000 < a < 100000 " + newVal);
                 return newVal;
@@ -63,7 +71,7 @@ public class Auction extends Stage {
         }
 
         else{
-            if(random.nextInt(100)<10){
+            if(random.nextInt(100)<5){
                 newVal = (lastBidValue + random.nextInt(100));
                 System.out.println("a > 100000 " + newVal);
                 return newVal;

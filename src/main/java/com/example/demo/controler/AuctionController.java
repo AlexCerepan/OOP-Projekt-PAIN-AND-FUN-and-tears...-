@@ -1,7 +1,6 @@
 package com.example.demo.controler;
 
 import com.example.AppUtils.SetScene;
-import com.example.Items.ItemDatabase;
 import com.example.Items.Items;
 import com.example.demo.Auction.Auction;
 import com.example.demo.Scenes;
@@ -14,9 +13,8 @@ import java.util.*;
 import static com.example.demo.controler.LogInControler.currUser;
 
 
-public class AuctionController implements AucItem {
+public class AuctionController {
 
-    public static AuctionController currC;
     public Items item;
     boolean endAuction;
     public SetScene scene = new Scenes();
@@ -37,16 +35,26 @@ public class AuctionController implements AucItem {
     Label theItem;
 
 
+
+    /**
+     * po stlaceni buttonu sa mi dane okno zavrie
+     * */
     @FXML
     protected void onReturnButtonClick() throws IOException {
         returnB();
     }
 
+    /**
+     * dana funkcia mi zohladnuje prihadzovanie na tovar
+     * */
     @FXML
-    protected void onBidButtonClick() throws IOException{
+    protected void onBidButtonClick(){
         addMoney();
     }
 
+    /**
+     * metoda ktora okazuje vo view aky predmet sa predava a aka je jeho cena
+     * */
     public void showWhatIsSelling(String name, float value){
         this.theItem.setText(name + "\n" + "Starting price: " + value);
     }
@@ -62,7 +70,7 @@ public class AuctionController implements AucItem {
        }
    }
 
-    void addMoney() throws IOException{
+    void addMoney(){
         // prerobene
         Auction currA = null;
         for (Auction a : ControlerManagment.auctionDatabase) {
@@ -87,6 +95,7 @@ public class AuctionController implements AucItem {
                 noMoney.setText("You bought " + item.name);
                 show.setVisible(false);
                 currUser.myItems.add(item);
+                currUser.wallet.value -= Integer.parseInt(value.getText());
                 AuctionMenuController.currC.notifyPls();
             }
 
@@ -95,23 +104,13 @@ public class AuctionController implements AucItem {
             }
 
 
-
-
-    @Override
-    // prerobit
-    public void notifypls(String name, AuctionController cur) {
-        //System.out.println("aktualny controller " + this);
-            for (Items i : ItemDatabase.itemData) {
-                if (Objects.equals(name, i.name)) {
-                //    System.out.println("Toto chcem ako controller " + currC);
-                    item = i;
-                    System.out.println(currC);
-                    System.out.println("Name: " + currC.item.name + " cost: " + currC.item.cost);
-                }
-        }
-    }
-
-
+/**
+ *
+ * tato funkcia ovlada a vatvara botov ktory prihadzuju proti pouzivatelovi
+ *
+ * @param auc akcia ktora sa prave vykonava
+ *
+ * */
 public void botsTurn(Auction auc){
     Random random = new Random();
     ArrayList<String> botsNames =new ArrayList<>();
